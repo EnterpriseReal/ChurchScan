@@ -28,5 +28,15 @@ while page <= args.end:
                 if "NULL" not in a['href'] and 'https' not in a['href']:
                     links.append(a['href'])
                     print(a['href'])
-
+                    if 'www' in a['href']:
+                        link = (a['href'].split('www.'))[1].strip()
+                        if '/' in link:
+                            clean_link = link.replace('/', '')
+                            os.system(f'sudo nmap -F -sS -T4 {clean_link}')
+                        else:
+                            os.system(f'sudo nmap -F -sS -T4 {link}')
+                else:
+                    pass
+            else:
+                pass
     page += 1
