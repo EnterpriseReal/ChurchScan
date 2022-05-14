@@ -29,7 +29,15 @@ while page <= args.end:
                     links.append(a['href'])
                     print(a['href'])
                     if 'www' in a['href']:
-                        link = (a['href'].split('www.'))[1].strip()
+                        link = a['href'].split('www.')[1].strip()
+                        if '/' in link:
+                            clean_link = link.replace('/', '')
+                            os.system(f'sudo nmap -F -sS -T4 {clean_link}')
+                        else:
+                            os.system(f'sudo nmap -F -sS -T4 {link}')
+                        pass
+                    else:
+                        link = a['href'].split('//')[1].strip()
                         if '/' in link:
                             clean_link = link.replace('/', '')
                             os.system(f'sudo nmap -F -sS -T4 {clean_link}')
